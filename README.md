@@ -252,33 +252,43 @@ Booking method accepts booking 'uuid' as an argument passed in as a string.
 
 ### Create And Validate A Booking
 
+The following post requests accept a hash as an argument in this format:
+
+    booking_data = {
+      pk: <availability pk (integer)>,
+      company_shortname: '<company shortname (string)>',
+      name: '<name (string)>',
+      phone: '<phone (string)>',
+      email: '<email (string)>',
+      customer_type_rates: [<customer type rate (integer)>, <customer type rate (integer)>]
+      note: '<note (string)>',
+      voucher_number: '<voucher number (string)'
+    }
+
+Please note the class of each value in the hash.  Also note that customer type rates are represented by an array of integers.
+
 **Create a Booking:**
 
     Endpoint: POST /companies/<shortname>/availabilities/<Availability.pk>/bookings/
 
     Method:   company.post_booking(booking_data)
 
-**Validate a Booking:**
+**Verify a Booking:**
 
     Endpoint: POST /companies/<shortname>/availabilities/<Availability.pk>/bookings/validate/
 
     Method:   company.post_verify_booking(booking_data)
 
-These post requests accept a hash as an argument in the following format:
+A Booking Verification has the following attributes which can be accessed by calling them as methods:
 
-        booking_data = {
-        pk: <availability pk (integer)>,
-        company_shortname: '<company shortname (string)>',
-        name: '<name (string)>',
-        phone: '<phone (string)>',
-        email: '<email (string)>',
-        customer_type_rates: [<customer type rate (integer)>, <customer type rate (integer)>]
-        note: '<note (string)>',
-        voucher_number: '<voucher number (string)'
-      }
+    verification = company.booking('<booking uuid>')
 
-Please note the class of each value in the hash.  Also note that customer type rates are represented by an array of integers.
-
+    verification.invoice_price
+    verification.receipt_taxes
+    verification.receipt_subtotal
+    verification.pickup
+    verification.receipt_total
+    verification.is_bookable
 
 ### Delete A Booking
 
