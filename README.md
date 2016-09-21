@@ -177,9 +177,9 @@ You can find the API information for all items [here](https://github.com/FareHar
 
     Endpoint: GET /companies/<shortname>/availabilities/<Availability.pk>/
 
-    Method:   company.availabilities
+    Method:   company.availability(<availability pk>)
 
-Returns an Availability object.
+Returns an Availability object.  The availability method accepts availability 'pk' as an argument passed in as an integer.
 
 **Availabilities By Date:**
 
